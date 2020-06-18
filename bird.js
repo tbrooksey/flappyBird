@@ -2,14 +2,16 @@
 function Bird() {
     this.y = height / 2;
     this.x = 64;
-  
+  this.index=0
     this.gravity = 0.7;
     this.lift = -12;
     this.velocity = 0;
   
     this.show = function() {
-      fill(255);
-      ellipse(this.x, this.y, 32, 32);
+      if(frameCount%10==0){
+        this.index++
+      }
+      image(birdImages[this.index%3], this.x, this.y);
     };
   
     this.up = function() {
@@ -18,7 +20,7 @@ function Bird() {
   
     this.update = function() {
       this.velocity += this.gravity;
-      // this.velocity *= 0.9;
+      this.velocity *= 0.9;
       this.y += this.velocity;
   
       if (this.y > height) {
